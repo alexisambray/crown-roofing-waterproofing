@@ -114,6 +114,49 @@ hr.sep {
     border-bottom: 1px solid var(--border);
 }
 
+/* Mobile nav */
+.menu-btn {
+    display: none; /* hidden on desktop */
+  }
+  
+  @media (max-width: 900px) {
+    .menu-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 14px;
+      border-radius: 12px;
+      border: 1px solid #e6e9ef;
+      background: #fff;
+      font-weight: 600;
+    }
+  
+    .navlinks {
+      display: none; /* collapsed by default */
+      position: absolute;
+      top: 72px; /* adjust if your header height differs */
+      left: 16px;
+      right: 16px;
+      background: #fff;
+      border: 1px solid #e6e9ef;
+      border-radius: 16px;
+      padding: 12px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+      z-index: 999;
+    }
+  
+    .navlinks.is-open {
+      display: grid;
+      gap: 8px;
+    }
+  
+    .navlinks a {
+      padding: 10px 12px;
+      border-radius: 12px;
+    }
+  }
+  
+
 .nav {
     display: flex;
     align-items: center;

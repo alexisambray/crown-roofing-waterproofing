@@ -19,3 +19,22 @@ if (menuBtn && navLinks) {
         if (href === path) a.classList.add('active');
     });
 })();
+
+(() => {
+    const btn = document.querySelector("[data-menu-btn]");
+    const nav = document.querySelector("[data-navlinks]");
+  
+    if (!btn || !nav) return;
+  
+    const toggle = () => {
+      const isOpen = nav.classList.toggle("is-open");
+      btn.setAttribute("aria-expanded", String(isOpen));
+    };
+  
+    btn.addEventListener("click", toggle);
+  
+    // Optional: close menu after clicking a link (nice on mobile)
+    nav.querySelectorAll("a").forEach((a) => {
+      a.addEventListener("click", () => nav.classList.remove("is-open"));
+    });
+  })();
