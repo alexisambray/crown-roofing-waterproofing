@@ -1,40 +1,36 @@
-// JavaScript source code
-// Mobile menu toggle
-const menuBtn = document.querySelector('[data-menu-btn]');
-const navLinks = document.querySelector('[data-navlinks]');
+document.addEventListener("DOMContentLoaded", () => {
 
-if (menuBtn && navLinks) {
-    menuBtn.addEventListener('click', () => {
-        navLinks.classList.toggle('open');
+  /* =========================
+     Mobile Menu Toggle
+  ========================== */
+  const menuBtn = document.querySelector("[data-menu-btn]");
+  const navLinks = document.querySelector("[data-navlinks]");
+
+  if (menuBtn && navLinks) {
+    menuBtn.addEventListener("click", () => {
+      const isOpen = navLinks.classList.toggle("open");
+      menuBtn.setAttribute("aria-expanded", isOpen ? "true" : "false");
     });
-}
 
-// Auto-active nav link based on current file name
-(function setActiveNav() {
-    const links = document.querySelectorAll('[data-nav] a');
-    const path = window.location.pathname.split('/').pop() || 'index.html';
-
-    links.forEach(a => {
-        const href = a.getAttribute('href');
-        if (href === path) a.classList.add('active');
+    // Close menu after clicking a link (mobile UX)
+    navLinks.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("open");
+        menuBtn.setAttribute("aria-expanded", "false");
+      });
     });
-})();
+  }
 
-(() => {
-    const btn = document.querySelector("[data-menu-btn]");
-    const nav = document.querySelector("[data-navlinks]");
-  
-    if (!btn || !nav) return;
-  
-    const toggle = () => {
-      const isOpen = nav.classList.toggle("is-open");
-      btn.setAttribute("aria-expanded", String(isOpen));
-    };
-  
-    btn.addEventListener("click", toggle);
-  
-    // Optional: close menu after clicking a link (nice on mobile)
-    nav.querySelectorAll("a").forEach((a) => {
-      a.addEventListener("click", () => nav.classList.remove("is-open"));
-    });
-  })();
+  /* =========================
+     Active Nav Link Highlight
+  ========================== */
+  const currentPage =
+    window.location.pathname.split("/").pop() || "index.html";
+
+  document.querySelectorAll(".navlinks a").forEach(link => {
+    if (link.getAttribute("href") === currentPage) {
+      link.classList.add("active");
+    }
+  });
+
+});
